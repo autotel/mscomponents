@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Many sliders</title>
+    <link rel="stylesheet" href="style/mscomponents.css">
+  </head>
+  <body>
+    <div id="place-for-sliders"></div>
+  </body>
+</html>
+<script src="libs/jquery.js"></script>
+<script src="libs/mscomponents/syncman.js"></script>
+<script src="libs/mscomponents/jquery.mouse.js"></script>
+<script src="libs/mscomponents/jquery.slider.js"></script>
+<script>
+$(document).ready(function(){
+  sliders=[];
+  for(i=0; i<12; i++){
+    sliders.push(new Slider($("#place-for-sliders"),{"background-color":"#DDD",display:"inline-block"}));
+    sliders[i].addClass("color_"+i);
+  }
+  var test=0;
+
+  sliders[0].css({display:"block",height:"30px",width:"356px"}).onChange(function(val){
+    for(s in sliders){
+      if(s!=0)
+        sliders[s].setData(0.5*(Math.sin(Math.pow(val.value*2,2)*s)+1));
+    }
+  }).vertical=false;
+
+
+});
+</script>
