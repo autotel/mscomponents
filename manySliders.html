@@ -17,7 +17,12 @@
 $(document).ready(function(){
   sliders=[];
   for(i=0; i<12; i++){
-    sliders.push(new Slider($("#place-for-sliders"),{"background-color":"#DDD",display:"inline-block"}));
+    sliders.push(new Slider($("#place-for-sliders"),{
+      css:{
+        "background-color":"#DDD",
+        display:"inline-block"
+      }
+    }));
     sliders[i].addClass("color_"+i);
   }
   var test=0;

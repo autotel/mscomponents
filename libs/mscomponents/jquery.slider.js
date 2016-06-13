@@ -16,7 +16,7 @@ This script create DOM sliders that can be used in web browser to control stuff.
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-Slider=function(parent,css,label){
+Slider=function(parent,options){
   //my reference number for data binding. With this number the socket binder knows who is the reciever of the data, and also with what name to send it
   //pendant: this can potentially create a problem, because two objects can be created simultaneously at different ends at the same time.
   //maybe instead of the simple push, there could be a callback, adn the object waits to receive it's socket id once its creation was propagated throughout all the network, or maybe there is an array for senting and other different for receiving... first option seems more sensible
@@ -25,12 +25,12 @@ Slider=function(parent,css,label){
   this._bindN=syncman.bindList.push(this)-1;
   this.$jq=$('<div class="slider-container" style="position:relative"></div>');
   this.$faderjq=$('<div class="slider-inner" style="pointer-events:none; position:absolute"></div>');
-  this.label=label||"";
+  this.label=options.label||"";
   this.labeljq=$('<p class="sliderlabel"></p>');
   this.$jq.append(this.$faderjq);
   this.$jq.append(this.labeljq);
-  if(css)
-    this.$jq.css(css);
+  if(options.css)
+    this.$jq.css(options.css);
   this.css=function(css){
     this.$jq.css(css);
     return this;
