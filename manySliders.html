@@ -25,10 +25,13 @@ $(document).ready(function(){
   sliders[0].css({display:"block",height:"30px",width:"356px"}).onChange(function(val){
     for(s in sliders){
       if(s!=0)
-        sliders[s].setData(0.5*(Math.sin(Math.pow(val.value*2,2)*s)+1));
+        sliders[s].setData(0.5*(Math.sin(val.value*Math.PI*200*s*1/12)+1));
     }
   }).vertical=false;
-
+  setInterval(function(){
+    sliders[0].setData(test%1);
+    test+=0.0001;
+  },40);
 
 });
 </script>
