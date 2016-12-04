@@ -1,6 +1,14 @@
-SequencerButton=function(n,parent){
+var syncman,mouse;
+// var $;
+exports.enable=function(sman,m){
+  syncman=sman;
+  mouse=m;
+  return Sequencer;
+};
+
+function SequencerButton(n,parent){
   this.jq=$('<div class="seqbutton"></div>');
-  this._bindN=sockman.bindList.push(this)-1;
+  this._bindN=syncman.bindList.push(this)-1;
   parent.jq.append(this.jq);
   this.data=0;
   //pendant: evaluate wether the var n is still useful. remove it at every end.
@@ -62,10 +70,11 @@ SequencerButton=function(n,parent){
 //defines all the sequencer parameters by math,
 //maybe in a funture by styling table
 var seqProg=0;
-Sequencer=function(n){
-  $("#sequencers").append('<div class="sequencer" id="seq_'+n+'"><p style="position:absolute"></p></div>');
+function Sequencer(parent,options){
+  var n=options.n||3;
+  parent.append('<div class="sequencer" id="seq_'+n+'"><p style="position:absolute"></p></div>');
   this.alive=false;
-  this._bindN=sockman.bindList.push(this)-1;
+  this._bindN=syncman.bindList.push(this)-1;
   this.jq=$('#seq_'+n);
   this.pos=0;
   this.data=[];
@@ -74,14 +83,14 @@ Sequencer=function(n){
   //must count an [every] amount of beats for each pos increment.
   this.subpos=0;
   this.jq.css({width:16*Math.ceil(this.len/4)+"px"});
-  this.jq.addClass("color_"+seqProg%channels.length);
+  //this.jq.addClass("color_"+seqProg%channels.length);
   this.disp=0;
   this.id=n;
   this.beatDisplace=0;
   var me=this;
   seqProg++;
-  this.channel=channels[this.id%channels.length];
-  for(bn=0; bn<this.len; bn++){
+  //this.channel=channels[this.id%channels.length];
+  for(var bn=0; bn<this.len; bn++){
     this.data[bn]=new SequencerButton(bn,this)
   }
   this.aliveChild=0;
@@ -130,7 +139,7 @@ Sequencer=function(n){
     }
   }
   this.die=function(){
-    for(bn in this.data){
+    for(var bn in this.data){
       this.data[bn].setData(0);
     }
     this.alive=false;

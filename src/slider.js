@@ -15,11 +15,11 @@ This script create DOM sliders that can be used in web browser to control stuff.
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-var syncman;
-var $;
-exports.enable=function(sman,jq){
+var syncman,mouse;
+// var $;
+exports.enable=function(sman,m){
   syncman=sman;
-  $=jq;
+  mouse=m;
   return Slider;
 };
 function Slider(parent,options){

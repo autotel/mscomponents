@@ -1,4 +1,6 @@
-
+exports.enable=function(){
+  return mouse;
+}
 var mouse={
   tool:"draw"
 };
