@@ -69,13 +69,13 @@ function SequencerButton(n,parent){
 }
 //defines all the sequencer parameters by math,
 //maybe in a funture by styling table
-var seqProg=0;
+var seqProg=4;
 function Sequencer(parent,options){
   var n=options.n||3;
-  parent.append('<div class="sequencer" id="seq_'+n+'"><p style="position:absolute"></p></div>');
+  this.jq=$('<div class="sequencer" id="seq_'+n+'"><p style="position:absolute"></p></div>');
+  parent.append(this.jq);
   this.alive=false;
   this._bindN=syncman.bindList.push(this)-1;
-  this.jq=$('#seq_'+n);
   this.pos=0;
   this.data=[];
   this.len=Math.pow(2,(seqProg%5)+1);

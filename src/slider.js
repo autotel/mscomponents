@@ -22,6 +22,13 @@ exports.enable=function(sman,m){
   mouse=m;
   return Slider;
 };
+
+/**
+* This is the description for Slider class
+*
+* @class Slider
+* @constructor
+*/
 function Slider(parent,options){
   //my reference number for data binding. With this number the socket binder knows who is the reciever of the data, and also with what name to send it
   //pendant: this can potentially create a problem, because two objects can be created simultaneously at different ends at the same time.
@@ -55,7 +62,18 @@ function Slider(parent,options){
     me.onChangeCallback=function(){callback(me.data)};
     return this;
   }
-
+  /**
+* My method description.  Like other pieces of your comment blocks,
+* this can span multiple lines.
+*
+* @method methodName
+* @param {String} foo Argument 1
+* @param {Object} config A config object
+* @param {String} config.name The name on the config object
+* @param {Function} config.callback A callback function on the config object
+* @param {Boolean} [extra=false] Do extra, optional work
+* @return {Boolean} Returns true on success
+*/
   this.setData=function(to,emit){
     if(emit===true){
       //pendant: in sequencers we use parent.id, and here we use _bindN. Towards a controller API and a more sensical code, I think both should use the bind element array. read note in first line of this file.
