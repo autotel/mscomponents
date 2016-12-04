@@ -15,8 +15,14 @@ This script create DOM sliders that can be used in web browser to control stuff.
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
-Slider=function(parent,options){
+var syncman;
+var $;
+exports.enable=function(sman,jq){
+  syncman=sman;
+  $=jq;
+  return Slider;
+};
+function Slider(parent,options){
   //my reference number for data binding. With this number the socket binder knows who is the reciever of the data, and also with what name to send it
   //pendant: this can potentially create a problem, because two objects can be created simultaneously at different ends at the same time.
   //maybe instead of the simple push, there could be a callback, adn the object waits to receive it's socket id once its creation was propagated throughout all the network, or maybe there is an array for senting and other different for receiving... first option seems more sensible

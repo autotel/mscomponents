@@ -15,10 +15,14 @@ This script contains a template for data-binding management if you want to do so
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-Syncman=function(){
+
+exports.enable=function(){
+  return new Syncman();
+};
+
+function Syncman(){
   //list of all the items that use data binding
   this.bindList=[];
   //how are you emitting changes? it depends on the server you use.
   this.emit=function(){}
 }
-syncman=new Syncman();
