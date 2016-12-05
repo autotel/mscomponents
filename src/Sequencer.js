@@ -1,12 +1,17 @@
+let eemiter=require('onhandlers');
 var syncman,mouse;
 // var $;
 exports.enable=function(sman,m){
   syncman=sman;
   mouse=m;
+
   return Sequencer;
 };
 
 function SequencerButton(n,parent){
+  eemiter.call(this);
+  this.on("test",function(){console.log("works!")});
+  this.handle("test");
   this.jq=$('<div class="seqbutton"></div>');
   this._bindN=syncman.bindList.push(this)-1;
   parent.jq.append(this.jq);
@@ -15,9 +20,10 @@ function SequencerButton(n,parent){
   this.n=n;
   var me=this;
   this.setData=function(to,emit){
-    if(emit==true){
-      sockChange("seqb:"+me._bindN+"","sV",to);
-    }
+    // if(emit==true){
+    //   sockChange("seqb:"+me._bindN+"","sV",to);
+    // }
+    // console.log("sdata");
     //socket may set data to 0 when is already 0, generating displace of parent's alivedhild
     if(to!=this.data){
       if(to==1){

@@ -11,6 +11,7 @@
   <script src="js/jquery.min.js"></script>
   <script src="build.js"></script>
   <script type="text/javascript">
+  var sequencers=[];
 $(document).ready(function(){
   var q=10;
   for (var a=0; a<q; a++)
@@ -18,7 +19,7 @@ $(document).ready(function(){
   for (var a=0; a<q; a++)
   new MsComponents.Button($("body"),{})
   for (var a=0; a<q; a++)
-  new MsComponents.Sequencer($("body"),{})
+  sequencers.push(new MsComponents.Sequencer($("body"),{}));
 });
 
   </script>

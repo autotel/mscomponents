@@ -87,7 +87,7 @@ function Slider(parent,options){
   this.addClass=function(to){
     this.$jq.addClass(to);
   }
-  this.vertical=true;
+  this.vertical=options.vertical||true;
   this.addClass("vertical");
   this.$jq.on("mousedown tap touchstart",function(event){
     event.preventDefault();
