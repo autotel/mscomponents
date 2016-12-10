@@ -7,7 +7,12 @@ exports.enable=function(sman,m){
 
   return Sequencer;
 };
-
+/**
+ * A generator of sequencers
+ *
+ * @class SequencerButton
+ * @constructor new MsComponents.Sequencer(DOM/Jquery element,{properties})
+ */
 function SequencerButton(n,parent){
   eemiter.call(this);
   this.on("test",function(){console.log("works!")});

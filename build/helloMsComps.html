@@ -20,6 +20,10 @@ $(document).ready(function(){
   new MsComponents.Button($("body"),{})
   for (var a=0; a<q; a++)
   sequencers.push(new MsComponents.Sequencer($("body"),{}));
+  for (var a=0; a<q; a++){
+    var m = new MsComponents.Clock($("body"),{interval:Math.random()*500+100});
+    m.on("tick",function(){ console.log("tick"+a)});
+  }
 });
 
   </script>

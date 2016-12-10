@@ -4,6 +4,14 @@ version 1.0
 /*.label{
   position:absolute;
 }*/
+.ms-clock{
+
+  transition: opacity 0.6s;
+}
+.ms-clock.tick{
+  /*background-color: rgba(0,0,0,0.5);*/
+  opacity: 0.1;
+}
 .sequencer{
   border: 1px outset;
   margin: 2.5px;
