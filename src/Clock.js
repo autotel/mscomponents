@@ -1,9 +1,9 @@
 
 var syncman,mouse;
 var OH=require("onhandlers");
-exports.enable=function(sman,m){
-  syncman=sman;
-  mouse=m;
+exports.enable=function(globals){
+  syncman=globals.syncman;
+  mouse=globals.mouse;
   return Clock;
 };
 function Clock(parent,options){

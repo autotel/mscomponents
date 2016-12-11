@@ -17,9 +17,9 @@ This script create DOM sliders that can be used in web browser to control stuff.
 */
 var syncman,mouse;
 // var $;
-exports.enable=function(sman,m){
-  syncman=sman;
-  mouse=m;
+exports.enable=function(globals){
+  syncman=globals.syncman;
+  mouse=globals.mouse;
   return Slider;
 };
 

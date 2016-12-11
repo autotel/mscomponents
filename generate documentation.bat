@@ -1,1 +1,1 @@
-yuidoc .
+documentation serve --github src/index.js
