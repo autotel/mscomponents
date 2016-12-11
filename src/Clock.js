@@ -7,6 +7,7 @@ exports.enable=function(globals){
   return Clock;
 };
 function Clock(parent,options){
+  this.name="clock";
   OH.call(this);
   var thisClock=this;
   this.data={value:0};

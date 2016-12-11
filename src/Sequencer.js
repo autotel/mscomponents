@@ -18,6 +18,7 @@ exports.enable=function(globals){
 var seqProg=4;
 function Sequencer(parent,options){
  var n=options.n||3;
+ var thisSequencer=this;
  this.name="sequencer"
  componentBase.call(this,parent,options);
  // this.$jq=$('<div class="sequencer" id="seq_'+n+'"><p style="position:absolute"></p></div>');
@@ -26,8 +27,9 @@ function Sequencer(parent,options){
  this._bindN=syncman.bindList.push(this)-1;
  this.pos=0;
  this.data=[];
- this.len=Math.pow(2,(seqProg%5)+1);
- this.evry=Math.pow(2,(seqProg%4)+1);
+ //set length or interval to options or default
+ this.len=options.len|Math.pow(2,(seqProg%5)+1);
+ this.evry=options.evry|Math.pow(2,(seqProg%4)+1);
  //must count an [every] amount of beats for each pos increment.
  this.subpos=0;
  this.$jq.css({width:16*Math.ceil(this.len/4)+"px"});
@@ -56,7 +58,9 @@ function Sequencer(parent,options){
  this.step=function(){
    var prevalive=this.alive;
    this.alive=this.aliveChild>0;
+  //  console.log(this.aliveChild);
    if(this.alive){
+    //  console.log("sete");
      //if the state of this.alive changes, we must emit the displacement, because it is new
      if(!prevalive){
        this.displace=(transportCurrentStep+this.subpos)%(this.len*this.evry);
@@ -74,9 +78,9 @@ function Sequencer(parent,options){
        if(this.data[this.pos].eval()==1){
          // this.channel.engine.start(0,this.channel.startOffset,this.channel.endTime);
          //so, this is called elsewhere aswelll.... the channel should have a trigger function
-         var loopStart=this.channel.startOffset;
-         var loopEnd=this.channel.endTime;
-         this.channel.sampler.triggerAttack(false,0,1,{start:loopStart,end:loopEnd});
+        //  var loopStart=this.channel.startOffset;
+        //  var loopEnd=this.channel.endTime;
+        //  this.channel.sampler.triggerAttack(false,0,1,{start:loopStart,end:loopEnd});
        }
      }else{
      }
@@ -84,6 +88,17 @@ function Sequencer(parent,options){
      // this.subpos=(this.subpos+1)%(this.len*this.evry);
      //i guess that.. but it can grow eternally
      this.subpos++;
+   }
+ }
+ this.setClock=function(clock,divisions){
+   if(divisions)
+   this.evry=divisions;
+   if(clock.on){
+     clock.on('tick',function(){thisSequencer.step()});
+     if(clock.name!="clock")
+     console.warn("you set the clock of a sequencer to somehting that is not a clock, but a "+clock.name);
+   }else{
+     console.warn("you tried to connect a "+this.name+" to an object that has no event hanlers ");
    }
  }
  this.die=function(){
@@ -96,9 +111,10 @@ function Sequencer(parent,options){
  // this.onStepTrigger=function(data){
  //   // console.log(data);
  // }
- this.$jq.on("mouseenter",function(){
-   focusChannel(me.channel.id);
- });
+ // this.$jq.on("mouseenter",function(){
+ //   focusChannel(me.channel.id);
+ // });
+ return this;
 }
 
 function SequencerButton(n,parent){
@@ -130,6 +146,7 @@ function SequencerButton(n,parent){
         parent.aliveChild--;
       }
     }
+    // console.log(parent.aliveChild);
     // console.log(parent.aliveChild);
   }
   this.$jq.on("mousedown tap touchstart",function(event){
