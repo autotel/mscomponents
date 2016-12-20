@@ -23,6 +23,7 @@ $(document).ready(function(){
   for (var a=0; a<q; a++){
     var m = new MsComponents.Clock($("body"),{interval:Math.random()*10+1});
     sequencers[a].setClock(m);
+    sequencers[a].on("trigger",function(a){console.log(a)});
 
   }
 });

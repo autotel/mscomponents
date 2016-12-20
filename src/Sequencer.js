@@ -27,9 +27,18 @@ function Sequencer(parent,options){
  this._bindN=syncman.bindList.push(this)-1;
  this.pos=0;
  this.data=[];
- //set length or interval to options or default
- this.len=options.len|Math.pow(2,(seqProg%5)+1);
- this.evry=options.evry|Math.pow(2,(seqProg%4)+1);
+ /**
+  * @param len
+  *how many steps the sequencer has
+  * @alias length
+  */
+ this.len=options.len|options.length|Math.pow(2,(seqProg%5)+1);
+ /**
+  * @param evry
+  * how many clock steps make a sequencer step
+  * @alias stepDivision
+  */
+ this.evry=options.evry|options.stepDivision|Math.pow(2,(seqProg%4)+1);
  //must count an [every] amount of beats for each pos increment.
  this.subpos=0;
  this.$jq.css({width:16*Math.ceil(this.len/4)+"px"});
@@ -45,15 +54,15 @@ function Sequencer(parent,options){
  }
  this.aliveChild=0;
  this.displace=0;
- this.setDisplace=function(to,emit){
-   if(emit=="only"){
-     emit=true;
-   }else{
-     this.subpos=((transportCurrentStep)%(this.len*this.evry))+to;
-   }
-   if(emit==true){
-     sockChange("seq:"+me._bindN+"","dspl",to);
-   }
+ this.setDisplace=function(to/*,emit*/){
+  //  if(emit=="only"){
+    //  emit=true;
+  //  }else{
+     this.subpos=((this.clock.currentStep)%(this.len*this.evry))+to;
+  //  }
+  //  if(emit==true){
+  //    sockChange("seq:"+me._bindN+"","dspl",to);
+  //  }
  }
  this.step=function(){
    var prevalive=this.alive;
@@ -63,9 +72,9 @@ function Sequencer(parent,options){
     //  console.log("sete");
      //if the state of this.alive changes, we must emit the displacement, because it is new
      if(!prevalive){
-       this.displace=(transportCurrentStep+this.subpos)%(this.len*this.evry);
-       console.log("ok. emit displae: "+this.displace);
-       this.setDisplace(this.displace,"only");
+       this.displace=(this.clock.currentStep+this.subpos)%(this.len*this.evry);
+       //console.log("ok. emit displae: "+this.displace);
+       //this.setDisplace(this.displace,"only");
      };
      //each sequencer has a different speed rates. while some plays one step per click, others will have one step per several clock ticks.
      //the sequencer starting point is also displaced, and it depends on the time when it got alived+its position at that moment.
@@ -75,12 +84,14 @@ function Sequencer(parent,options){
        // this.onStepTrigger(data);
        // stepFunction(data);
        this.pos=(this.subpos/this.evry)%(this.len);
-       if(this.data[this.pos].eval()==1){
+       var vl=this.data[this.pos].eval();
+       if(vl){
          // this.channel.engine.start(0,this.channel.startOffset,this.channel.endTime);
          //so, this is called elsewhere aswelll.... the channel should have a trigger function
         //  var loopStart=this.channel.startOffset;
         //  var loopEnd=this.channel.endTime;
         //  this.channel.sampler.triggerAttack(false,0,1,{start:loopStart,end:loopEnd});
+        this.handle("trigger",vl);
        }
      }else{
      }
@@ -100,6 +111,7 @@ function Sequencer(parent,options){
    }else{
      console.warn("you tried to connect a "+this.name+" to an object that has no event hanlers ");
    }
+   this.clock=clock;
  }
  this.die=function(){
    for(var bn in this.data){

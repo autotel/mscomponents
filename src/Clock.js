@@ -7,6 +7,7 @@ exports.enable=function(globals){
   return Clock;
 };
 function Clock(parent,options){
+  this.currentStep=0;
   this.name="clock";
   OH.call(this);
   var thisClock=this;
@@ -36,6 +37,7 @@ function Clock(parent,options){
     thisClock.handle("tick");
     thisClock.addClass("tick");
     setTimeout(function(){thisClock.removeClass("tick");},20);
+    this.currentStep++;
   }
   setInterval(this.tick,options.interval|500);
 }
