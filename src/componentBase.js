@@ -42,7 +42,7 @@ function componentBase(parent,options){
   /**
   * @property mouseActivationMode
   * @type String
-  * dragAll: the buttons will activate through all the trajectory of the mouse while pressed
+  *  dragAll: the buttons will activate through all the trajectory of the mouse while pressed
   * oneByOne: one click=one button press
   * dragLast: the mouse can be tragged and will activae and hover only the last button that it entered
   * hover: the buttins are activated upon hover regardless of whether is clicked or not

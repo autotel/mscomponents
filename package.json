@@ -25,7 +25,8 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
+    "onhandlers": "^1.0.3",
     "tone": "^0.8.0",
-    "onhandlers":"^1.0.3"
+    "web-audio-scheduler": "^1.3.0"
   }
 }
