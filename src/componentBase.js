@@ -96,16 +96,18 @@ function componentBase(parent,options,defaults){
   if(!options.mouseActivationMode){
     options.mouseActivationMode="dragAll";
   }
-
+  this.mouseActive=false;
   function mouseActivate(event){
     thisComponent.handle("onMouseStart",event);
     event.preventDefault();
     thisComponent.addClass("active");
+    thisComponent.mouseActive=true;
   }
   function mouseDeactivate(event){
     thisComponent.handle("onMouseEnd",event);
     event.preventDefault();
     thisComponent.removeClass("active");
+    thisComponent.mouseActive=false;
   }
 
   //to avoid iffy chains that are a pain to change

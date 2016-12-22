@@ -104,26 +104,35 @@ function Slider(parent,options){
     this.$jq.addClass(to);
   }
   // this.vertical=options.vertical||true;
-
+  this.$jq.on("mousemove",function(event){
+    if(me.mouseActive){
+      event.preventDefault();
+      if(me.vertical){
+        me.setData(1-event.offsetY/me.$jq.height(),true);//,true
+      }else{
+        me.setData(event.offsetX/me.$jq.width(),true);//,true
+      }
+    }
+  });
   this.on("onMouseStart",function(event){
     event.preventDefault();
-    if(me.vertical){
-      me.setData(1-event.offsetY/me.$jq.height(),true);//,true
-    }else{
-      me.setData(event.offsetX/me.$jq.width(),true);//,true
-    }
+    // if(me.vertical){
+    //   me.setData(1-event.offsetY/me.$jq.height(),true);//,true
+    // }else{
+    //   me.setData(event.offsetX/me.$jq.width(),true);//,true
+    // }
   });
 
   this.on("onMouseEnd",function(event){
     if(mouse.buttonDown){
       event.preventDefault();
       var emitThis=event.type=="mouseleave"||event.type=="mouseup"
-      if(me.vertical){
-        //the strange second paramenter in setdata was true, but it could clog the socket
-        me.setData(1-event.offsetY/me.$jq.height(),emitThis);//,true
-      }else{
-        me.setData(event.offsetX/me.$jq.width(),emitThis);//,true
-      }
+      // if(me.vertical){
+      //   //the strange second paramenter in setdata was true, but it could clog the socket
+      //   me.setData(1-event.offsetY/me.$jq.height(),emitThis);//,true
+      // }else{
+      //   me.setData(event.offsetX/me.$jq.width(),emitThis);//,true
+      // }
     }else{
     }
   });
@@ -133,7 +142,7 @@ function Slider(parent,options){
     window.setTimeout(function(){
       jq.removeClass("turn");
     },200);
-    return valueFunction(this.data.value);
+    return this.valueFunction(this.data.value);
   }
 
   this.updateDom=function(){
