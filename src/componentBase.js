@@ -25,7 +25,11 @@ function componentBase(parent,options){
   if(!this.name){
     this.name="component";
   }
+  /**
+    * @property {$jq} own's jquery object
+  */
   this.$jq=$('<div class="ms-'+this.name+'"></div>');
+
   if(options.css)
     this.$jq.css(options.css);
   this.css=function(css){

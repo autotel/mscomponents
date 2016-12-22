@@ -5,6 +5,8 @@ var globals={};
 globals.syncman=require('./syncman.js').enable();
 globals.mouse=require('./mouse.js').enable();
 globals.audioContext=audioContext;
+var _cb=require('./componentBase.js');
+globals.componentBase=_cb.get({syncman:globals.syncman,mouse:globals.mouse});
 
 var Slider=require('./Slider.js').enable(globals);
 var Sequencer=require('./Sequencer.js').enable(globals);
@@ -13,6 +15,7 @@ var Clock=require('./Clock.js').enable(globals);
 
 /**
 * A library for easy graphic control of synths, music and probably other things.
+* This documentation has a long way to go.
 * @instance MsComponents
 * instance any library component by new `MsComponents.component()`
 * @example var mySlider= new MsComponents.Slider();

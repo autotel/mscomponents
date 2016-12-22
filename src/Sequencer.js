@@ -1,10 +1,10 @@
-var componentBase=require('./componentBase');
+var componentBase;
 let eemiter=require('onhandlers');
 var syncman,mouse;
 exports.enable=function(globals){
   syncman=globals.syncman;
   mouse=globals.mouse;
-  componentBase=componentBase.get({syncman:syncman,mouse:mouse});
+  componentBase=globals.componentBase;
   return Sequencer;
 }
 /**

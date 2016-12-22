@@ -1,25 +1,11 @@
-/*
-This script create DOM sliders that can be used in web browser to control stuff. They can be synced through sockets and others by using callbacks.
-    Copyright (C) 2016 Joaquín Aldunate
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+var componentBase;
+let eemiter=require('onhandlers');
 var syncman,mouse;
-// var $;
+
 exports.enable=function(globals){
   syncman=globals.syncman;
   mouse=globals.mouse;
+  componentBase=globals.componentBase;
   return Slider;
 };
 
@@ -36,23 +22,35 @@ exports.enable=function(globals){
 * @param {String} options.css additional css properties for the slider
 * @param {function} options.valueFunction
 * defines the operation to apply to the internal value upon evaluation. the default is just linear
+
 * @example mySlider new MsComponents.Slider($("body"),{vertical:false,value:0.73});
 */
 function Slider(parent,options){
+  var thisSlider=this;
+  this.name="slider"
+  componentBase.call(this,parent,options);
   //my reference number for data binding. With this number the socket binder knows who is the reciever of the data, and also with what name to send it
   //pendant: this can potentially create a problem, because two objects can be created simultaneously at different ends at the same time.
   //maybe instead of the simple push, there could be a callback, adn the object waits to receive it's socket id once its creation was propagated throughout all the network, or maybe there is an array for senting and other different for receiving... first option seems more sensible
   this.data={value:0};
+/**
+  * @param {function} options.valueFunction
+*/
   this.valueFunction=function(val){
     return val;
   }
   this._bindN=syncman.bindList.push(this)-1;
-  this.$jq=$('<div class="slider-container" style="position:relative"></div>');
-  this.$faderjq=$('<div class="slider-inner" style="pointer-events:none; position:absolute"></div>');
+
+  // this.$jq=$('<div class="slider-container" style="position:relative"></div>');
+
   this.label=options.label||"";
-  this.labeljq=$('<p class="sliderlabel"></p>');
+
+  this.$faderjq=$('<div class="slider-inner" style="pointer-events:none; position:absolute"></div>');
+  this.$labeljq=$('<p class="sliderlabel"></p>');
+
   this.$jq.append(this.$faderjq);
-  this.$jq.append(this.labeljq);
+  this.$jq.append(this.$labeljq);
+
   if(options.css)
     this.$jq.css(options.css);
   this.css=function(css){
@@ -132,7 +130,7 @@ function Slider(parent,options){
     if(this.vertical){
       this.$faderjq.css({bottom:0,width:"100%",height:this.data.value*this.$jq.height()});
     }else{
-      this.labeljq.html(this.label);
+      this.$labeljq.html(this.label);
       this.$faderjq.css({bottom:0,width:this.data.value*this.$jq.width(),height:"100%"});
     }
   }

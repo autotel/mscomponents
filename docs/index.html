@@ -48,6 +48,12 @@
                       <li class='h5'><span>Instance members</span></li>
                       
                       <li><a
+                        href='#Slider#valueFunction'
+                        class='regular pre-open'>
+                        #valueFunction
+                      </a></li>
+                      
+                      <li><a
                         href='#Slider#setData'
                         class='regular pre-open'>
                         #setData
@@ -57,6 +63,26 @@
                   
                   
                 </div>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#componentbase'
+                  class="">
+                  componentBase
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#mouseactivationmode'
+                  class="">
+                  mouseActivationMode
+                  
+                </a>
                 
                 </li>
               
@@ -93,26 +119,6 @@
                 
                 </li>
               
-                
-                <li><a
-                  href='#componentbase'
-                  class="">
-                  componentBase
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#mouseactivationmode'
-                  class="">
-                  mouseActivationMode
-                  
-                </a>
-                
-                </li>
-              
             </ul>
           </div>
           <div class='mt1 h6 quiet'>
@@ -136,7 +142,8 @@
   </div>
   
 
-  <p>A library for easy graphic control of synths, music and probably other things.</p>
+  <p>A library for easy graphic control of synths, music and probably other things.
+This documentation has a long way to go.</p>
 
 
   <div class='pre p1 fill-light mt0'>MsComponents</div>
@@ -243,13 +250,6 @@ defaults to
 </span></td>
                 </tr>
               
-                <tr>
-                  <td class='break-word'><span class='code bold'>options.valueFunction</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a></code>
-                  </td>
-                  <td class='break-word'><span>defines the operation to apply to the internal value upon evaluation. the default is just linear
-</span></td>
-                </tr>
-              
             </tbody>
           </table>
           
@@ -277,6 +277,72 @@ defaults to
   
     <div class='py1 quiet mt1 prose-big'>Instance Members</div>
     <div class="clearfix">
+  
+    <div class='border-bottom' id='Slider#valueFunction'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>new valueFunction(options.valueFunction, val)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>new valueFunction(options.valueFunction: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a>, val: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options.valueFunction</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a>)</code>
+	    defines the operation to apply to the internal value upon evaluation. the default is just linear
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>val</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
   
     <div class='border-bottom' id='Slider#setData'>
       <div class="clearfix small pointer toggle-sibling">
@@ -365,6 +431,119 @@ assign the slider.data.value to your value.</p>
     </div>
   
 </div>
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='componentbase'>
+      componentBase
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>The base of components.
+It contains the function that are shared among all MsComponents. Makes little sense to use this alone</p>
+
+
+  <div class='pre p1 fill-light mt0'>new componentBase(parent: any, options: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>parent</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='mouseactivationmode'>
+      mouseActivationMode
+    </h3>
+    
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>mouseActivationMode</div>
+  
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
   
 
@@ -533,119 +712,6 @@ assign the slider.data.value to your value.</p>
     </div>
   
 </div>
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='componentbase'>
-      componentBase
-    </h3>
-    
-    
-  </div>
-  
-
-  <p>The base of components.
-It contains the function that are shared among all MsComponents. Makes little sense to use this alone</p>
-
-
-  <div class='pre p1 fill-light mt0'>new componentBase(parent: any, options: any)</div>
-  
-  
-
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>parent</span> <code class='quiet'>(any)</code>
-	    
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>options</span> <code class='quiet'>(any)</code>
-	    
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='mouseactivationmode'>
-      mouseActivationMode
-    </h3>
-    
-    
-  </div>
-  
-
-  
-
-  <div class='pre p1 fill-light mt0'>mouseActivationMode</div>
-  
-  
-
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
   
 
