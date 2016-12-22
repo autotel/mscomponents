@@ -12,18 +12,33 @@ exports.get=function(globals){
  *
  * @class componentBase
  * @constructor new MsComponents.componentBase(DOM/Jquery element,{properties})
+ * @constructor componentBase.call(this,parent,options,defaults);
  *
  * @property parent
  * @type Jquery / Dom element / componentBase
- * @param options
+ * @param {object} options values for customization of the component
  * @param {object} defaults values that will belong to the inheriting object.
  * the default object will contain all the default properties for the object itself
  * aswell as for the object.properties.
+ *
  * All default values will be overwritten by the options values, and therefore
  * declaring a default in the object will make a property of the options object
  * to belong to the object, where otherwise the options property would remain
  * in the object.properties only.
+ *
+ *
+ * @example
 
+ function AButton(parent,options){
+    var defaults={a:0,b:1}
+    this.name="AButton";
+    componentBase.call(this,parent,options,defaults);
+ }
+ var d=new Button($(body),{a:4,c:5});
+//will create a div with class ms-AButton, and var d will contain properties
+//a=4, b=1 & options= {a:4,b:1,c:5}
+
+ *
  * @type object
  */
 function componentBase(parent,options,defaults){

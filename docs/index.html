@@ -210,7 +210,7 @@ This documentation has a long way to go.</p>
 It contains the function that are shared among all MsComponents. Makes little sense to use this alone</p>
 
 
-  <div class='pre p1 fill-light mt0'>new componentBase(parent: any, options: any, defaults: any)</div>
+  <div class='pre p1 fill-light mt0'>new componentBase(options: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>, defaults: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>, parent: any)</div>
   
   
 
@@ -226,23 +226,31 @@ It contains the function that are shared among all MsComponents. Makes little se
       
         <div class='space-bottom0'>
           <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
+	    values for customization of the component
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>defaults</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
+	    values that will belong to the inheriting object.
+the default object will contain all the default properties for the object itself
+aswell as for the object.properties.
+<p>All default values will be overwritten by the options values, and therefore
+declaring a default in the object will make a property of the options object
+to belong to the object, where otherwise the options property would remain
+in the object.properties only.</p>
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
             <span class='code bold'>parent</span> <code class='quiet'>(any)</code>
-	    
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>options</span> <code class='quiet'>(any)</code>
-	    
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>defaults</span> <code class='quiet'>(any)</code>
 	    
           </div>
           
@@ -257,6 +265,19 @@ It contains the function that are shared among all MsComponents. Makes little se
 
   
 
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">AButton</span>(<span class="hljs-params">parent,options</span>)</span>{
+<span class="hljs-keyword">var</span> defaults={<span class="hljs-attr">a</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">b</span>:<span class="hljs-number">1</span>}
+<span class="hljs-keyword">this</span>.name=<span class="hljs-string">"AButton"</span>;
+componentBase.call(<span class="hljs-keyword">this</span>,parent,options,defaults);
+}
+<span class="hljs-keyword">var</span> d=<span class="hljs-keyword">new</span> Button($(body),{<span class="hljs-attr">a</span>:<span class="hljs-number">4</span>,<span class="hljs-attr">c</span>:<span class="hljs-number">5</span>});
+<span class="hljs-comment">//will create a div named ms-button, and var d will contain properties</span>
+<span class="hljs-comment">//a=4, b=1 &amp; options= {a:4,b:1,c:5}</span></pre>
+    
   
 
   

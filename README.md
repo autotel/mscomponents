@@ -3,12 +3,38 @@
 # MsComponents
 
 A library for easy graphic control of synths, music and probably other things.
+This documentation has a long way to go.
 
 **Examples**
 
 ```javascript
 var mySlider= new MsComponents.Slider();
 ```
+
+# componentBase
+
+The base of components.
+It contains the function that are shared among all MsComponents. Makes little sense to use this alone
+
+**Parameters**
+
+-   `options`  
+-   `defaults` **[object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** values that will belong to the inheriting object.
+    the default object will contain all the default properties for the object itself
+    aswell as for the object.properties.
+    All default values will be overwritten by the options values, and therefore
+    declaring a default in the object will make a property of the options object
+    to belong to the object, where otherwise the options property would remain
+    in the object.properties only.
+-   `parent`  
+
+## $jq
+
+**Properties**
+
+-   `own` **$jq** 's jquery object
+
+# mouseActivationMode
 
 # Slider
 
@@ -20,7 +46,15 @@ Slider produces a vertical or horizontal slider that allows to control a value f
     defaults to `$("body")`
 -   `options` **[object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** object containing options
     -   `options.css` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** additional css properties for the slider
-    -   `options.valueFunction` **[function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** defines the operation to apply to the internal value upon evaluation. the default is just linear
+    -   `options.valueFunction` **[function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** 
+    -   `options.label` **[object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** :""
+    -   `options.valueFunction` **[object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** :function(val){
+        return val;
+        }
+    -   `options.value` **[object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** :0
+    -   `options.data` **[object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** :{value:0}
+    -   `options.ertical` **[object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** :true
+        defines the operation to apply to the internal value upon evaluation. the default is just linear
 
 **Examples**
 
@@ -62,15 +96,3 @@ A generator of sequencers
 **Parameters**
 
 -   `evry`  how many clock steps make a sequencer step
-
-# componentBase
-
-The base of components.
-It contains the function that are shared among all MsComponents. Makes little sense to use this alone
-
-**Parameters**
-
--   `parent`  
--   `options`  
-
-# mouseActivationMode
