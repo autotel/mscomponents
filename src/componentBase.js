@@ -15,13 +15,40 @@ exports.get=function(globals){
  *
  * @property parent
  * @type Jquery / Dom element / componentBase
- * @property options
+ * @param options
+ * @param {object} defaults values that will belong to the inheriting object.
+ * the default object will contain all the default properties for the object itself
+ * aswell as for the object.properties.
+ * All default values will be overwritten by the options values, and therefore
+ * declaring a default in the object will make a property of the options object
+ * to belong to the object, where otherwise the options property would remain
+ * in the object.properties only.
+
  * @type object
  */
-function componentBase(parent,options){
-  eemiter.call(this);
-  this.options=options;
+function componentBase(parent,options,defaults){
   var thisComponent=this;
+
+  var defaults=defaults||{};
+  //make sure this object will contain defaults and options.
+  if(options){
+    this.options=options;
+  }else{
+    this.options={};
+  }
+
+  //defaults contain default properties for the object
+  //options contain the user written options that will overwrite the defaults.
+  //object keeps track of the options in the this.options, so if the object mutates, it can be retrieved back
+  for(var a in defaults){
+    if(!this.options[a])
+    this.options[a]=defaults[a];
+    this[a]=this.options[a];
+  }
+
+  console.log("post",this.options,options,defaults);
+
+  eemiter.call(this);
   if(!this.name){
     this.name="component";
   }
@@ -32,7 +59,7 @@ function componentBase(parent,options){
 
   if(options.css)
     this.$jq.css(options.css);
-  this.css=function(css){
+    this.css=function(css){
     this.$jq.css(options.css);
     return this;
   }
@@ -56,17 +83,17 @@ function componentBase(parent,options){
   }
 
   function mouseActivate(event){
-    thisComponent.handle("onMouseStart");
+    thisComponent.handle("onMouseStart",event);
     event.preventDefault();
     thisComponent.addClass("active");
   }
   function mouseDeactivate(event){
-    thisComponent.handle("onMouseEnd");
+    thisComponent.handle("onMouseEnd",event);
     event.preventDefault();
     thisComponent.removeClass("active");
   }
 
-  //to avoid if chains that are a pain to change
+  //to avoid iffy chains that are a pain to change
   function aIsInB(a,b){
     for (var c in b){
       if(a==b[c]){console.log("true");return true;}
