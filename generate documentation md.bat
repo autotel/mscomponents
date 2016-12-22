@@ -1,0 +1,1 @@
+documentation build src/index.js --format md -o README.md
