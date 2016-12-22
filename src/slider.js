@@ -24,17 +24,28 @@ exports.enable=function(globals){
 };
 
 /**
-* This is the description for Slider class
+* Slider produces a vertical or horizontal slider that allows to control a value from dragging with the mouse.
+
 *
 * @class Slider
 * @constructor
+* @param {jquery} parent or DOM element to which this slider will be attached.
+* defaults to `$("body")`
+* @default
+* @param {object} options object containing options
+* @param {String} options.css additional css properties for the slider
+* @param {function} options.valueFunction
+* defines the operation to apply to the internal value upon evaluation. the default is just linear
+* @example mySlider new MsComponents.Slider($("body"),{vertical:false,value:0.73});
 */
 function Slider(parent,options){
   //my reference number for data binding. With this number the socket binder knows who is the reciever of the data, and also with what name to send it
   //pendant: this can potentially create a problem, because two objects can be created simultaneously at different ends at the same time.
   //maybe instead of the simple push, there could be a callback, adn the object waits to receive it's socket id once its creation was propagated throughout all the network, or maybe there is an array for senting and other different for receiving... first option seems more sensible
   this.data={value:0};
-
+  this.valueFunction=function(val){
+    return val;
+  }
   this._bindN=syncman.bindList.push(this)-1;
   this.$jq=$('<div class="slider-container" style="position:relative"></div>');
   this.$faderjq=$('<div class="slider-inner" style="pointer-events:none; position:absolute"></div>');
@@ -63,16 +74,14 @@ function Slider(parent,options){
     return this;
   }
   /**
-* My method description.  Like other pieces of your comment blocks,
-* this can span multiple lines.
-*
-* @method methodName
-* @param {String} foo Argument 1
-* @param {Object} config A config object
-* @param {String} config.name The name on the config object
-* @param {Function} config.callback A callback function on the config object
-* @param {Boolean} [extra=false] Do extra, optional work
-* @return {Boolean} Returns true on success
+* Set the data to a value, and perform the graphic changes and data bindings that correspond to this change.
+* If you wanted to change the value, but not get this change reflected in the slider position, you would
+* assign the slider.data.value to your value.
+* @method setData
+* @param {number} to target value
+* @param {boolean} [emit=false] *not ready* wether to emit through syncman
+* @return {undefined} no return
+* @example mySlider.setData(0.53);
 */
   this.setData=function(to,emit){
     if(emit===true){
@@ -117,7 +126,7 @@ function Slider(parent,options){
     window.setTimeout(function(){
       jq.removeClass("turn");
     },200);
-    return this.data.value;
+    return valueFunction(this.data.value);
   }
   this.updateDom=function(){
     if(this.vertical){
@@ -127,5 +136,5 @@ function Slider(parent,options){
       this.$faderjq.css({bottom:0,width:this.data.value*this.$jq.width(),height:"100%"});
     }
   }
-  this.setData(0);
+  this.setData(options.value);
 }

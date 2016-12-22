@@ -1,1 +1,1 @@
-documentation serve --github src/index.js
+documentation build src/index.js --format html -o docs
