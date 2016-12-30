@@ -7,17 +7,24 @@ exports.enable=function(globals){
   return Button;
 }
 function Button(parent,options){
+  var defaults={
+    label:"☻",
+    value:0,
+    data:{value:0},
+    vertical:true,
+    states:false,
+  }
   this.name="button";
-  componentBase.call(this,parent,options);
+  componentBase.call(this,parent,options,defaults);
   //my reference number for data binding. With this number the socket binder knows who is the reciever of the data, and also with what name to send it
   //pendant: this can potentially create a problem, because two objects can be created simultaneously at different ends at the same time.
   //maybe instead of the simple push, there could be a callback, adn the object waits to receive it's socket id once its creation was propagated throughout all the network, or maybe there is an array for senting and other different for receiving... first option seems more sensible
-  this.data={value:0};
-  this.states=false;
+  // this.data={value:0};
+  // this.states=false;
   this._bindN=syncman.bindList.push(this)-1;
   //this.$jq=$('<div class="ms-button"></div>');
-  this.label=options.label||"☻";
-  this.$jq.append(this.$faderjq);
+  // this.label=options.label||;
+  // this.$jq.append(this.$faderjq);
   this.$jq.html(this.label);
   // if(options.css)
   //   this.$jq.css(options.css);
@@ -32,8 +39,8 @@ function Button(parent,options){
     this.states=options.switch;
     this.switchState(0);
   }
-  this.onClickCallback=function(){};
-  this.onReleaseCallback=function(){};
+  // this.onClickCallback=function(){};
+  // this.onReleaseCallback=function(){};
   //pendant: this should be part of a base prototype, not repeated in each type
   // if(typeof (parent.append||false)=="function"){
   //   parent.append(this.$jq);
@@ -47,18 +54,22 @@ function Button(parent,options){
   //   me.onClickCallback=function(){callback(me.data)};
   //   return this;
   // }
-
-  this.$jq.on("mousedown tap touchstart",function(event){
-    me.onClickCallback(me.data);
-    event.preventDefault();
-    me.switchState();
-    me.addClass("active");
+  this.on("onMouseStart",function(e){
+    this.handle("trigger");
   });
-  this.$jq.on("mouseup mouseleave",function(event){
-    me.onReleaseCallback(me.data);
-    event.preventDefault();
-    me.removeClass("active");
+  this.on("onMouseEnd",function(e){
+    this.handle("trigger");
   });
+  // this.$jq.on("mousedown tap touchstart",function(event){
+  //   me.onClickCallback(me.data);
+  //   event.preventDefault();
+  //   me.switchState();
+  // });
+  // this.$jq.on("mouseup mouseleave",function(event){
+  //   me.onReleaseCallback(me.data);
+  //   event.preventDefault();
+  //   me.removeClass("active");
+  // });
 }
 
 
