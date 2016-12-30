@@ -40,6 +40,7 @@ function Slider(parent,options){
     valueFunction:function(val){
       return val;
     },
+    mouseActivationMode:"dragLast",
     value:0,
     data:{value:0},
     vertical:true,
@@ -152,6 +153,7 @@ function Slider(parent,options){
     }else{
       this.$labeljq.html(this.label);
       this.$faderjq.css({bottom:0,width:this.data.value*this.$jq.width(),height:"100%"});
+      this.addClass("horizontal");
     }
   }
   console.log(this.options,"bals");

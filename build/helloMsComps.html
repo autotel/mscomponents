@@ -16,7 +16,8 @@
 $(document).ready(function(){
   var q=10;
   for (var a=0; a<q; a++)
-  sliders.push(new MsComponents.Slider($("body"),{}));
+  sliders.push(new MsComponents.Slider($("body"),{vertical:a>q/4}));
+  //  sliders.push(new MsComponents.Slider($("body"),{vertical:true}));
   for (var a=0; a<q; a++)
   new MsComponents.Button($("body"),{})
   for (var a=0; a<q; a++)
@@ -25,7 +26,6 @@ $(document).ready(function(){
     var m = new MsComponents.Clock($("body"),{interval:0.1,start:true});
     sequencers[a].setClock(m);
     sequencers[a].on("trigger",function(a){console.log(a)});
-
   }
 });
 
