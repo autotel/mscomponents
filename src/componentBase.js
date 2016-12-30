@@ -141,7 +141,7 @@ function componentBase(parent,options,defaults){
     }
   });
   this.$jq.on("mouseout",function(event){
-    if(aIsInB(options.mouseActivationMode,["hover","oneByOne","dragLast"])){
+    if(aIsInB(options.mouseActivationMode,["hover","oneByOne","dragLast","dragAll"])){
       mouseDeactivate(event);
     }
   });
