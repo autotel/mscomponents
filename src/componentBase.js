@@ -56,7 +56,7 @@ function componentBase(parent,options,defaults){
   //options contain the user written options that will overwrite the defaults.
   //object keeps track of the options in the this.options, so if the object mutates, it can be retrieved back
   for(var a in defaults){
-    if(!this.options[a])
+    if(this.options[a]===undefined)
     this.options[a]=defaults[a];
     this[a]=this.options[a];
   }
