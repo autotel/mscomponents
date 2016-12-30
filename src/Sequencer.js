@@ -105,7 +105,7 @@ function Sequencer(parent,options){
    if(divisions)
    this.evry=divisions;
    if(clock.on){
-     clock.on('tick',function(){thisSequencer.step()});
+     clock.on('trigger',function(){thisSequencer.step()});
      if(clock.name!="clock")
      console.warn("you set the clock of a sequencer to somehting that is not a clock, but a "+clock.name);
    }else{
@@ -131,8 +131,8 @@ function Sequencer(parent,options){
 
 function SequencerButton(n,parent){
   eemiter.call(this);
-  this.on("test",function(){console.log("works!")});
-  this.handle("test");
+  // this.on("test",function(){console.log("works!")});
+  // this.handle("test");
   this.$jq=$('<div class="seqbutton"></div>');
   this._bindN=syncman.bindList.push(this)-1;
   parent.$jq.append(this.$jq);

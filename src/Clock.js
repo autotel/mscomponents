@@ -61,7 +61,8 @@ function Clock(parent,options){
   this.tick=function(a){
     lastTimerExecuted++;
     createFurtherTimerSchedules(4);
-    thisClock.handle("tick");
+    // thisClock.handle("tick");
+    thisClock.handle("trigger");
     thisClock.addClass("tick");
     // console.log("tick");
     setTimeout(function(){thisClock.removeClass("tick");},20);
